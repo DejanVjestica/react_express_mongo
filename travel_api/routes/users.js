@@ -21,4 +21,13 @@ router.post('/', (req, res)=>{
     })
 })
 
+router.get('/:userId', (req,res)=>{
+    db.User.findById(req.params.userId).then((user)=>{
+        console.log(user);
+        res.json(user)
+    }).catch((err)=>{
+        res.send(err);
+    })
+})
+
 module.exports = router;
