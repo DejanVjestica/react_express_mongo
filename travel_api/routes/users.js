@@ -1,33 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const helpers = require('../helpers/users')
+router.route('/').get(helpers.getUsers).post(helpers.createUser);
 
-router.get('/', (req, res) => {
-    // res.send('test')
-    db.User.find().then((users)=>{
-        res.json(users)
-    }).catch((e)=>{
-        console.log(e);
-
-    })
-});
-
-router.post('/', (req, res)=>{
-    console.log("boom", req.body);
-    db.User.create(req.body).then((newUser)=>{
-        res.json(newUser);
-    }).catch((err)=>{
-        res.send(err)
-    })
-})
-
-router.get('/:userId', (req,res)=>{
-    db.User.findById(req.params.userId).then((user)=>{
-        console.log(user);
-        res.json(user)
-    }).catch((err)=>{
-        res.send(err);
-    })
-})
+router.route('/:userId').get(helpers.getUsers).put(helpers.updateUser).delete(helpers.deleteUser);
 
 module.exports = router;
