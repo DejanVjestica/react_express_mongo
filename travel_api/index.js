@@ -4,14 +4,15 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended:true }))
+app.use(bodyParser.urlencoded({ extended:true }));
+app.use(express.static(__dirname + '/views'));
 // Routes
 const userRoutes = require('./routes/users');
 
 app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
-    res.send('BOOM else')
+    res.sendFile('index.html')
 });
 
 // app.post('/', (req, res) => {
