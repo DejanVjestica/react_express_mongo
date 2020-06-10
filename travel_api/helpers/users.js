@@ -6,7 +6,6 @@ exports.getUsers = (req, res) => {
         res.json(users)
     }).catch((e)=>{
         console.log(e);
-
     })
 };
 
