@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom'
 
 import './index.css';
 import App from './App';
@@ -12,9 +13,11 @@ const cookies = new Cookies();
 let component;
 let userId = false;
 // let userId = Cookies.load("userId");
-cookies.set('isLogedIn', true, { path: '/' });
-console.log(cookies.get('myCata'))
-if (cookies.get('isLogedIn')){
+cookies.set('isLogedIn', false, { path: '/' });
+console.log("cookies isLogedIn: ",cookies.get('isLogedIn'));
+
+
+if (cookies.get('isLogedIn') === false){
   component =
   <React.StrictMode>
     <App />
@@ -27,7 +30,7 @@ if (cookies.get('isLogedIn')){
 }
 
 ReactDOM.render(
-  component, document.getElementById('root')
+  <BrowserRouter>{component}</BrowserRouter>, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
